@@ -1,0 +1,7 @@
+FROM traefik:v1.0.1
+
+EXPOSE 80
+EXPOSE 443
+EXPOSE 8080
+
+ENTRYPOINT ["/traefik"]
