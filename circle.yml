@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - sudo docker build -t quay.io/replicatedcom/traefik:${CIRCLE_SHA1:0:7} $HOME/traefik
+
+deployment:
+  docker:
+    branch: master
+    owner: replicatedhq
+    commands:
+      - sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS quay.io
+      - sudo docker push quay.io/replicatedcom/traefik:${CIRCLE_SHA1:0:7}
